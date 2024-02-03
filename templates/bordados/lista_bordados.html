@@ -1,0 +1,135 @@
+<!-- bordados/templates/bordados/lista_bordados_separados.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle de Bordado de Camisetas</title>
+    <!-- Adicione o link para o CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .first-table {
+            margin-top: 70px; /* Espaçamento superior entre a primeira tabela e a seção anterior */
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+     <a class="navbar-brand" href="#">Controle de Bordados</a>
+     <button type="button" class="btn btn-success">
+         Adicionar Bordado
+      <a  href="{% url 'novo_bordado' %}"></a>
+</button>
+<div class="container mt-4">
+    <!-- Adição do menu de filtragem -->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Bordados na Loja</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bordando</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bordados Concluídos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        {% if bordados_na_loja %}
+        <div class="row">
+            <div class="col-md-12 first-table">
+                <h2>Bordados na loja</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tamanho</th>
+                            <th>Quantidade</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bordado in bordados_na_loja %}
+                        <tr>
+                            <td>{{ bordado.nome }}</td>
+                            <td>{{ bordado.tamanho }}</td>
+                            <td>{{ bordado.quantidade }}</td>
+                            <td><a href="{% url 'editar_status' bordado.id %}" class="btn btn-primary">Editar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Outras tabelas para os demais status -->
+        {% if bordados_bordando %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h2>Bordando</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tamanho</th>
+                            <th>Quantidade</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bordado in bordados_bordando %}
+                        <tr>
+                            <td>{{ bordado.nome }}</td>
+                            <td>{{ bordado.tamanho }}</td>
+                            <td>{{ bordado.quantidade }}</td>
+                            <td><a href="{% url 'editar_status' bordado.id %}" class="btn btn-primary">Editar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Tabela para bordados concluídos -->
+        {% if bordados_concluidos %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h2>Bordados concluídos</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tamanho</th>
+                            <th>Quantidade</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bordado in bordados_concluidos %}
+                        <tr>
+                            <td>{{ bordado.nome }}</td>
+                            <td>{{ bordado.tamanho }}</td>
+                            <td>{{ bordado.quantidade }}</td>
+                            <td><a href="{% url 'editar_status' bordado.id %}" class="btn btn-primary">Editar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            <div class="mt-4">
+            <a href="{% url 'novo_bordado' %}" class="btn btn-primary">Adicionar Novo Bordado</a>
+        </div>
+        {% endif %}
+
+        <!-- Botão para adicionar novos bordados -->
+
+    </div>
+</body>
+</html>

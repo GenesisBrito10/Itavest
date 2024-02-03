@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Status</title>
+    <!-- Adicione o link para o CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Editar Status do Bordado "{{ bordado.nome }}"</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select class="form-control" name="status">
+                    <option value="Bordando" {% if bordado.status == "Bordando" %}selected{% endif %}>Bordando</option>
+                    <option value="Na Loja" {% if bordado.status == "Na Loja" %}selected{% endif %}>Na Loja</option>
+                    <option value="Concluído" {% if bordado.status == "Concluído" %}selected{% endif %}>Concluído</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
